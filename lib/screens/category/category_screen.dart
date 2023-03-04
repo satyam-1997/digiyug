@@ -1,4 +1,5 @@
 import 'package:digiyug/screens/category/category_controller.dart';
+import 'package:digiyug/screens/home_screen_ui/Dashboard/dashboard.dart';
 import 'package:digiyug/util/theme/theme_manager.dart';
 import 'package:dx_generator/dx_generator.dart';
 import 'package:dx_router/dx_router.dart';
@@ -58,15 +59,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-
                       filterBottomSheet();
-
                     },
                     child: SizedBox(
                       height: Get.height * 0.08,
                       width: Get.width * 0.12,
                       // color: Colors.black,
-                      child: Image.asset("asset/images/language.jpg",),
+                      child: Image.asset(
+                        "asset/images/language.jpg",
+                      ),
                     ),
                   ),
                 ],
@@ -90,7 +91,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 height: Get.height * 0.02,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  if (categoryController.selectedcategoryList.value.length >=
+                      2) {
+                    Get.to(Dashboard());
+                  }
+                },
                 child: Center(
                     child: Obx(
                   () => Container(
@@ -197,33 +203,25 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
   }
 
-  filterBottomSheet(){
+  filterBottomSheet() {
     showModalBottomSheet(
-
         isScrollControlled: true,
         context: Get.context!,
         shape: RoundedRectangleBorder(
-
           borderRadius: BorderRadius.only(
-              topRight: Radius.circular(15),
-              topLeft: Radius.circular(15)),
+              topRight: Radius.circular(15), topLeft: Radius.circular(15)),
         ),
         builder: (context) {
           return Container(
-            height: Get.height*0.5,
+            height: Get.height * 0.5,
             padding: EdgeInsets.all(10),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-
-
-                ],
+                children: [],
               ),
             ),
           );
         });
   }
 }
-
-

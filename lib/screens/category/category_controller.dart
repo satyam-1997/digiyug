@@ -49,11 +49,12 @@ class CategoryController extends GetxController {
 
   setIsSelected(int index) {
     if (categoryList.value[index].isSelected == true) {
-      for (var element in selectedcategoryList.value) {
-        if (categoryList.value[index] == element) {
-          selectedcategoryList.value.remove(element);
+      selectedcategoryList.value.removeWhere((element) {
+        if (element == categoryList.value[index]) {
+          return true;
         }
-      }
+        return false;
+      });
       categoryList.value[index].isSelected = false;
     } else {
       categoryList.value[index].isSelected =

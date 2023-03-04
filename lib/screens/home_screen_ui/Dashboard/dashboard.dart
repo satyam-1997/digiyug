@@ -291,10 +291,11 @@ class _DashboardState extends State<Dashboard> {
                                   child: const Text(
                                     'Home',
                                     style: TextStyle(
-                                        fontFamily: 'IBMPlexSansHebrewRegular',
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13.0,
-                                        color: primaryColor),
+                                      fontFamily: 'IBMPlexSansHebrewRegular',
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13.0,
+                                      color: primaryColor,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -303,7 +304,8 @@ class _DashboardState extends State<Dashboard> {
                         : SizedBox(
                             height: 27.0,
                             width: 27.0,
-                            child: SvgPicture.asset("asset/images/home.svg")),
+                            child: SvgPicture.asset("asset/images/home.svg"),
+                          ),
                   ),
                   MaterialButton(
                     onPressed: () {
@@ -338,10 +340,11 @@ class _DashboardState extends State<Dashboard> {
                                   child: const Text(
                                     'Template',
                                     style: TextStyle(
-                                        fontFamily: 'IBMPlexSansHebrewRegular',
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13.0,
-                                        color: primaryColor),
+                                      fontFamily: 'IBMPlexSansHebrewRegular',
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13.0,
+                                      color: primaryColor,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -406,7 +409,10 @@ class _DashboardState extends State<Dashboard> {
                         : SizedBox(
                             height: 27.0,
                             width: 27.0,
-                            child: SvgPicture.asset("asset/images/onspot.svg")),
+                            child: SvgPicture.asset(
+                              "asset/images/onspot.svg",
+                              color: Colors.black,
+                            )),
                   ),
                   MaterialButton(
                     onPressed: () {
@@ -431,12 +437,13 @@ class _DashboardState extends State<Dashboard> {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: currentTab == 3
-                                          ? Border.all(
-                                              color: primaryColor,
-                                            )
-                                          : null),
+                                    shape: BoxShape.circle,
+                                    border: currentTab == 3
+                                        ? Border.all(
+                                            color: primaryColor,
+                                          )
+                                        : null,
+                                  ),
                                   height: 28.0,
                                   width: 28.0,
                                   child: Padding(
@@ -467,7 +474,8 @@ class _DashboardState extends State<Dashboard> {
                             child: Image.asset(
                               "asset/images/Ellipse.png",
                               // color: secondaryColorText,
-                            )),
+                            ),
+                          ),
                   )
                 ],
               ),

@@ -252,6 +252,7 @@ class _DashboardState extends State<Dashboard> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        elevation: 10,
         child: SizedBox(
           height: 69.0,
           child: Row(

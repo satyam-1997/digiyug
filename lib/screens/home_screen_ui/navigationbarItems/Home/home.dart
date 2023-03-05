@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
       options: CarouselOptions(
         viewportFraction: 1,
         height: Get.height * 0.2,
-        disableCenter: true,
+        enlargeCenterPage: true,
         autoPlay: true,
         onPageChanged: (index, reason) {},
       ),

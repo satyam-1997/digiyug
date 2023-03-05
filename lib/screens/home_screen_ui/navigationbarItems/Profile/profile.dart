@@ -12,12 +12,11 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        margin: EdgeInsets.only(left: 10,right: 10),
+        margin: EdgeInsets.only(left: 10, right: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,76 +26,94 @@ class _ProfileState extends State<Profile> {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Color(0xffED213A), Color(0xff93291E )],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    )
-                ),
+                  colors: [Color(0xffED213A), Color(0xff93291E)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                )),
                 child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            // crossAxisAlignment: CrossAxisAlignment.s,
-            children: [
-                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // crossAxisAlignment: CrossAxisAlignment.s,
                   children: [
-                    Container(
-                      margin: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(50)
+                    Row(
+                      children: [
+                        Container(
+                            margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(50)),
+                            height: 70,
+                            width: 70,
+                            // color: Colors.black,
+                            child: Icon(Icons.person)),
+                        Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Kundan Singh Panwar",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w900,
+                                    letterSpacing: 0.3),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                "+91 9009611093",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w900,
+                                    letterSpacing: 0.3),
+                              ),
+                            ],
+                          ),
                         ),
-                        height: 70,
-                        width: 70,
-                        // color: Colors.black,
-                        child: Icon(Icons.person)),
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Kundan Singh Panwar",
-                            style: TextStyle(fontSize: 16,color: Colors.white,fontWeight: FontWeight.w900,letterSpacing: 0.3),
+                      ],
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => EditProfile(),
                           ),
-                          SizedBox(height: 8,),
-                          Text("+91 9009611093",
-                            style: TextStyle(fontSize: 14,color: Colors.white,fontWeight: FontWeight.w900,letterSpacing: 0.3),
-                          ),
-                        ],
+                        );
+                        // Navigator.pushNamed(context,MRouter.sellAndEarnDetails);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 18,
+                          color: Colors.white,
+                        )),
                       ),
                     ),
                   ],
                 ),
-
-                InkWell(
-                  onTap:(){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) => EditProfile(),
-                      ),
-                    );
-                    // Navigator.pushNamed(context,MRouter.sellAndEarnDetails);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(child: Icon(Icons.arrow_forward_ios,size: 18,
-                      color: Colors.white,
-                    )),
-                  ),
-                ),
-
-            ],
-                ),
               ),
             ),
-
             Container(
               margin: EdgeInsets.only(left: 10),
-              child: Text('Subscription',style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+              child: Text(
+                'Subscription',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
             ),
-            Container(child: Card(
+            Container(
+                child: Card(
               // color: Colors.redAccent,
               child: Padding(
-                padding: const EdgeInsets.only(left: 7.0,top: 15,bottom: 15,right: 7),
+                padding: const EdgeInsets.only(
+                    left: 7.0, top: 15, bottom: 15, right: 7),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   // crossAxisAlignment: CrossAxisAlignment.s,
@@ -104,88 +121,124 @@ class _ProfileState extends State<Profile> {
                     Expanded(
                       child: Container(
                         child: Center(
-                          child: Text("Free Plan",
-                            style: TextStyle(fontSize: 22,color: primaryColor,fontWeight: FontWeight.w900,letterSpacing: 0.3),
+                          child: Text(
+                            "Free Plan",
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: primaryColor,
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 0.3),
                           ),
                         ),
                       ),
                     ),
-
                     InkWell(
-                      onTap:(){
+                      onTap: () {
                         // Navigator.pushNamed(context,MRouter.sellAndEarnDetails);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Center(child: Icon(Icons.arrow_forward_ios,size: 18,
+                        child: Center(
+                            child: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 18,
                           color: primaryColor,
                         )),
                       ),
                     ),
-
                   ],
                 ),
               ),
             )),
             Container(
               margin: EdgeInsets.only(left: 10),
-              child: Text('Service',style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+              child: Text(
+                'Service',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
             ),
-            Container(
-              height: Get.height/2,
-              width: double.infinity,
-              child: ListView.builder(
-                  itemCount: 6,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      // color: Colors.redAccent,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 7.0,top: 10,bottom: 10,right: 7),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          // crossAxisAlignment: CrossAxisAlignment.s,
-                          children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Container(
-                                      decoration: BoxDecoration(
-                                          color: primaryColor,
-                                          borderRadius: BorderRadius.circular(30)
-                                      ),
-                                      height: 50,
-                                      width: 50,
-                                      // color: Colors.black,
-                                      child: Icon(index == 0 ? Icons.support_agent_outlined : index == 1 ? Icons.translate_outlined : Icons.room_preferences_rounded,color: Colors.white,)),
-
-                                  SizedBox(width: 8,),
-                                  Container(
-                                    child: Text(index == 0 ? 'On spot post':index == 1 ? 'Change language of post':index == 2 ? 'Refer a friend':index == 3 ? 'Change category type':index == 4 ? "Faq's":index == 5 ? 'Feedback': "Privacy policy",
-                                    style: TextStyle(color: primaryColor,fontWeight: FontWeight.w900,letterSpacing: 0.3),
-                                    ),
+            ListView.builder(
+                itemCount: 6,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    // color: Colors.redAccent,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 7.0, top: 10, bottom: 10, right: 7),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // crossAxisAlignment: CrossAxisAlignment.s,
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Container(
+                                    decoration: BoxDecoration(
+                                        color: primaryColor,
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    height: 50,
+                                    width: 50,
+                                    // color: Colors.black,
+                                    child: Icon(
+                                      index == 0
+                                          ? Icons.support_agent_outlined
+                                          : index == 1
+                                              ? Icons.translate_outlined
+                                              : Icons.room_preferences_rounded,
+                                      color: Colors.white,
+                                    )),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Container(
+                                  child: Text(
+                                    index == 0
+                                        ? 'On spot post'
+                                        : index == 1
+                                            ? 'Change language of post'
+                                            : index == 2
+                                                ? 'Refer a friend'
+                                                : index == 3
+                                                    ? 'Change category type'
+                                                    : index == 4
+                                                        ? "Faq's"
+                                                        : index == 5
+                                                            ? 'Feedback'
+                                                            : "Privacy policy",
+                                    style: TextStyle(
+                                        color: primaryColor,
+                                        fontWeight: FontWeight.w900,
+                                        letterSpacing: 0.3),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-
-                            InkWell(
-                              onTap:(){
-                                // Navigator.pushNamed(context,MRouter.sellAndEarnDetails);
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(child: Icon(Icons.arrow_forward_ios,size: 18,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              // Navigator.pushNamed(context,MRouter.sellAndEarnDetails);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                  child: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 18,
                                 color: primaryColor,
-                                )),
-                              ),
+                              )),
                             ),
-
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    );
-                  }),
-            ),
+                    ),
+                  );
+                }),
             SizedBox(
               width: double.infinity,
               height: 50.0,
@@ -218,8 +271,9 @@ class _ProfileState extends State<Profile> {
                 },
               ),
             ),
-            SizedBox(height: 20,)
-
+            SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),

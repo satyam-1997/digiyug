@@ -4,6 +4,9 @@ import 'package:get/get.dart';
 class CategoryController extends GetxController {
   Rx<List<CategoryModel>> categoryList = Rx<List<CategoryModel>>([]);
   Rx<List<CategoryModel>> selectedcategoryList = Rx<List<CategoryModel>>([]);
+  RxBool isEnglishSelected = false.obs;
+  RxBool isHindiSelected = false.obs;
+  RxBool isLangSelected = false.obs;
 
   @override
   void onInit() {

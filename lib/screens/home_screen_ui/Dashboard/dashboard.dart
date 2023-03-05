@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../Common/constants.dart';
 import '../navigationbarItems/Home/home.dart';
@@ -94,81 +95,30 @@ class _DashboardState extends State<Dashboard> {
                                   fontSize: 20.0,
                                 ),
                               ),
-                              SizedBox(
-                                height: 18.0,
-                                width: 301.0,
-                                child: Text(
-                                  'Choose language according to your preference.',
-                                  style: TextStyle(
-                                    color: secondaryColorText,
-                                    fontFamily: 'IBMPlexSansHebrewRegular',
-                                  ),
+                              Text(
+                                'Choose language according to your preference.',
+                                style: TextStyle(
+                                  color: secondaryColorText,
+                                  fontFamily: 'IBMPlexSansHebrewRegular',
                                 ),
                               ),
                               SizedBox(
                                 height: 20.0,
                               ),
-                              Container(
-                                height: 70.0,
-                                width: 318.0,
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                        'asset/images/RectangleEng.png',
-                                      ),
-                                      fit: BoxFit.fill),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5.0)),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 25.0,
-                                        width: 25.0,
-                                        padding: const EdgeInsets.all(2.0),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              width: 1, color: Colors.white),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(100)),
+                              GestureDetector(
+                                onTap: () {},
+                                child: Container(
+                                  height: 70.0,
+                                  width: Get.width,
+                                  decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                          'asset/images/RectangleEng.png',
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 10.0,
-                                      ),
-                                      Text(
-                                        'English',
-                                        style: TextStyle(
-                                            color: Color(0xffFFFFFF),
-                                            fontSize: 24.0,
-                                            fontFamily:
-                                                'IBMPlexSansHebrewRegular',
-                                            fontWeight: FontWeight.w500),
-                                      )
-                                    ],
+                                        fit: BoxFit.fill),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5.0)),
                                   ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20.0,
-                              ),
-                              Container(
-                                height: 70.0,
-                                width: 318.0,
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                        'asset/images/Rectanglehind.png',
-                                      ),
-                                      fit: BoxFit.fill),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5.0)),
-                                ),
-                                child: InkWell(
-                                  hoverColor: secondaryColorText,
-                                  onTap: () {},
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),
                                     child: Row(
@@ -188,7 +138,7 @@ class _DashboardState extends State<Dashboard> {
                                           width: 10.0,
                                         ),
                                         Text(
-                                          'हिंदी',
+                                          'English',
                                           style: TextStyle(
                                               color: Color(0xffFFFFFF),
                                               fontSize: 24.0,
@@ -197,6 +147,60 @@ class _DashboardState extends State<Dashboard> {
                                               fontWeight: FontWeight.w500),
                                         )
                                       ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              GestureDetector(
+                                onTap: () {},
+                                child: Container(
+                                  height: 70.0,
+                                  width: Get.width,
+                                  decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                          'asset/images/Rectanglehind.png',
+                                        ),
+                                        fit: BoxFit.fill),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5.0)),
+                                  ),
+                                  child: InkWell(
+                                    hoverColor: secondaryColorText,
+                                    onTap: () {},
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 25.0,
+                                            width: 25.0,
+                                            padding: const EdgeInsets.all(2.0),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color: Colors.white),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(100)),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10.0,
+                                          ),
+                                          Text(
+                                            'हिंदी',
+                                            style: TextStyle(
+                                                color: Color(0xffFFFFFF),
+                                                fontSize: 24.0,
+                                                fontFamily:
+                                                    'IBMPlexSansHebrewRegular',
+                                                fontWeight: FontWeight.w500),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

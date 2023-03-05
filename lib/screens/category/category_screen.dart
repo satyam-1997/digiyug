@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../util/styles.dart';
+import '../home_screen_ui/Common/constants.dart';
 
 @GenerateDxRoute()
 class CategoryScreen extends StatefulWidget {
@@ -204,24 +205,139 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 
   filterBottomSheet() {
-    showModalBottomSheet(
-        isScrollControlled: true,
-        context: Get.context!,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(15), topLeft: Radius.circular(15)),
-        ),
-        builder: (context) {
-          return Container(
-            height: Get.height * 0.5,
-            padding: EdgeInsets.all(10),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [],
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Select Language',
+                style: TextStyle(
+                  fontFamily: 'IBMPlexSansHebrewBold',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20.0,
+                ),
               ),
-            ),
-          );
-        });
+              Text(
+                'Choose language according to your preference.',
+                style: TextStyle(
+                  color: secondaryColorText,
+                  fontFamily: 'IBMPlexSansHebrewRegular',
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              GestureDetector(
+                onTap: () {
+                  categoryController.isEnglishSelected.value = true;
+                  categoryController.isLangSelected.value = true;
+                  setState(() {});
+                },
+                child: Obx(
+                  () => Container(
+                    height: 70.0,
+                    width: Get.width,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                            'asset/images/RectangleEng.png',
+                          ),
+                          fit: BoxFit.fill),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 25.0,
+                            width: 25.0,
+                            padding: const EdgeInsets.all(2.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 1, color: Colors.white),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(100)),
+                            ),
+                            child: categoryController.isEnglishSelected.value
+                                ? Icon(Icons.done)
+                                : null,
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text(
+                            'English',
+                            style: TextStyle(
+                                color: Color(0xffFFFFFF),
+                                fontSize: 24.0,
+                                fontFamily: 'IBMPlexSansHebrewRegular',
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  height: 70.0,
+                  width: Get.width,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                          'asset/images/Rectanglehind.png',
+                        ),
+                        fit: BoxFit.fill),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
+                  child: InkWell(
+                    hoverColor: secondaryColorText,
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 25.0,
+                            width: 25.0,
+                            padding: const EdgeInsets.all(2.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 1, color: Colors.white),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(100)),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text(
+                            'हिंदी',
+                            style: TextStyle(
+                                color: Color(0xffFFFFFF),
+                                fontSize: 24.0,
+                                fontFamily: 'IBMPlexSansHebrewRegular',
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 }

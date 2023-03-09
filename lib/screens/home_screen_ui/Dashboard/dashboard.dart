@@ -34,17 +34,13 @@ class _DashboardState extends State<Dashboard> {
       appBar: AppBar(
         toolbarHeight: 70.0,
         automaticallyImplyLeading: false,
-        title: SizedBox(
-          height: 35.0,
-          width: 90.0,
-          child: Text(
-            'DigiYug',
-            style: TextStyle(
-                fontFamily: 'IBMPlexSansHebrewBold',
-                fontWeight: FontWeight.w600,
-                color: primaryColor,
-                fontSize: 25.0),
-          ),
+        title: Text(
+          'DigiYug',
+          style: TextStyle(
+              fontFamily: 'IBMPlexSansHebrewBold',
+              fontWeight: FontWeight.w600,
+              color: primaryColor,
+              fontSize: 25.0),
         ),
         actions: [
           Row(
@@ -284,13 +280,15 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             child: Row(
                               children: [
-                                SizedBox(
-                                    height: 26.0,
-                                    width: 26.0,
-                                    child: SvgPicture.asset(
-                                      "asset/images/home.svg",
-                                      color: primaryColor,
-                                    )),
+                                Flexible(
+                                  child: SizedBox(
+                                      height: 26.0,
+                                      width: 26.0,
+                                      child: SvgPicture.asset(
+                                        "asset/images/home.svg",
+                                        color: primaryColor,
+                                      )),
+                                ),
                                 Container(
                                   padding: EdgeInsets.only(left: 10.0),
                                   child: const Text(
@@ -333,13 +331,15 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             child: Row(
                               children: [
-                                SizedBox(
-                                    height: 25.0,
-                                    width: 25.0,
-                                    child: SvgPicture.asset(
-                                      "asset/images/template.svg",
-                                      color: primaryColor,
-                                    )),
+                                Flexible(
+                                  child: SizedBox(
+                                      height: 25.0,
+                                      width: 25.0,
+                                      child: SvgPicture.asset(
+                                        "asset/images/template.svg",
+                                        color: primaryColor,
+                                      )),
+                                ),
                                 Container(
                                   padding: EdgeInsets.only(left: 10.0),
                                   child: const Text(
@@ -355,11 +355,13 @@ class _DashboardState extends State<Dashboard> {
                               ],
                             ),
                           )
-                        : SizedBox(
-                            height: 27.0,
-                            width: 27.0,
-                            child:
-                                SvgPicture.asset("asset/images/template.svg")),
+                        : Flexible(
+                            child: SizedBox(
+                                height: 27.0,
+                                width: 27.0,
+                                child: SvgPicture.asset(
+                                    "asset/images/template.svg")),
+                          ),
                   ),
                 ],
               ),
@@ -390,13 +392,15 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             child: Row(
                               children: [
-                                SizedBox(
-                                    height: 26.0,
-                                    width: 26.0,
-                                    child: SvgPicture.asset(
-                                      "asset/images/onspot.svg",
-                                      color: primaryColor,
-                                    )),
+                                Flexible(
+                                  child: SizedBox(
+                                      height: 26.0,
+                                      width: 26.0,
+                                      child: SvgPicture.asset(
+                                        "asset/images/onspot.svg",
+                                        color: primaryColor,
+                                      )),
+                                ),
                                 Container(
                                   padding: EdgeInsets.only(left: 10.0),
                                   child: const Text(

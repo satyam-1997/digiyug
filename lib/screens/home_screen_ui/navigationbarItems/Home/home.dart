@@ -5,6 +5,8 @@ import 'package:digiyug/util/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../template/template_screen.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -281,51 +283,56 @@ class ListComponent extends StatelessWidget {
     String text,
     String image,
   ) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8),
-      child: Container(
-        height: Get.height * 0.2,
-        width: Get.width * 0.43,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Stack(
-          children: [
-            Stack(
-              children: [
-                Container(
-                  height: Get.height * 0.2,
-                  width: Get.width * 0.43,
-                  child: Image.asset(
-                    image,
-                    fit: BoxFit.fill,
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => TemplatePagePage());
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(right: 8),
+        child: Container(
+          height: Get.height * 0.2,
+          width: Get.width * 0.43,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Stack(
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    height: Get.height * 0.2,
+                    width: Get.width * 0.43,
+                    child: Image.asset(
+                      image,
+                      fit: BoxFit.fill,
+                    ),
                   ),
-                ),
-                Container(
-                  height: Get.height * 0.2,
-                  width: Get.width * 0.43,
-                  color: Colors.black.withOpacity(0.3),
-                ),
-              ],
-            ),
-            //checkbox
-
-            //word
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 10, right: 10),
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: Dimens.font_16sp,
+                  Container(
+                    height: Get.height * 0.2,
+                    width: Get.width * 0.43,
+                    color: Colors.black.withOpacity(0.3),
                   ),
-                ),
+                ],
               ),
-            )
-          ],
+              //checkbox
+
+              //word
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10, right: 10),
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: Dimens.font_16sp,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

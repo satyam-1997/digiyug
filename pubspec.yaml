@@ -46,6 +46,10 @@ dependencies:
   introduction_screen: ^3.1.6
   flutter_launcher_icons: ^0.11.0
   rename: ^2.1.1
+  permission_handler: ^10.2.0
+  image_gallery_saver:
+  path_provider:
+  share_plus: ^6.3.1
   carousel_slider: ^4.2.1
   sms_autofill: ^2.2.0
 

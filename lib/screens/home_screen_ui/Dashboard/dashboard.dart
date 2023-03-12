@@ -280,15 +280,13 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             child: Row(
                               children: [
-                                Flexible(
-                                  child: SizedBox(
-                                      height: 26.0,
-                                      width: 26.0,
-                                      child: SvgPicture.asset(
-                                        "asset/images/home.svg",
-                                        color: primaryColor,
-                                      )),
-                                ),
+                                SizedBox(
+                                    height: 26.0,
+                                    width: 26.0,
+                                    child: SvgPicture.asset(
+                                      "asset/images/home.svg",
+                                      color: primaryColor,
+                                    )),
                                 Container(
                                   padding: EdgeInsets.only(left: 10.0),
                                   child: const Text(
@@ -331,15 +329,13 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             child: Row(
                               children: [
-                                Flexible(
-                                  child: SizedBox(
-                                      height: 25.0,
-                                      width: 25.0,
-                                      child: SvgPicture.asset(
-                                        "asset/images/template.svg",
-                                        color: primaryColor,
-                                      )),
-                                ),
+                                SizedBox(
+                                    height: 25.0,
+                                    width: 25.0,
+                                    child: SvgPicture.asset(
+                                      "asset/images/template.svg",
+                                      color: primaryColor,
+                                    )),
                                 Container(
                                   padding: EdgeInsets.only(left: 10.0),
                                   child: const Text(
@@ -355,13 +351,11 @@ class _DashboardState extends State<Dashboard> {
                               ],
                             ),
                           )
-                        : Flexible(
-                            child: SizedBox(
-                                height: 27.0,
-                                width: 27.0,
-                                child: SvgPicture.asset(
-                                    "asset/images/template.svg")),
-                          ),
+                        : SizedBox(
+                            height: 27.0,
+                            width: 27.0,
+                            child:
+                                SvgPicture.asset("asset/images/template.svg")),
                   ),
                 ],
               ),
@@ -392,15 +386,13 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             child: Row(
                               children: [
-                                Flexible(
-                                  child: SizedBox(
-                                      height: 26.0,
-                                      width: 26.0,
-                                      child: SvgPicture.asset(
-                                        "asset/images/onspot.svg",
-                                        color: primaryColor,
-                                      )),
-                                ),
+                                SizedBox(
+                                    height: 26.0,
+                                    width: 26.0,
+                                    child: SvgPicture.asset(
+                                      "asset/images/onspot.svg",
+                                      color: primaryColor,
+                                    )),
                                 Container(
                                   padding: EdgeInsets.only(left: 10.0),
                                   child: const Text(
@@ -574,4 +566,3 @@ class _DashboardState extends State<Dashboard> {
       // ),
       // backgroundColor: Colors.blue[100], //background color of scaffold
   // }
-

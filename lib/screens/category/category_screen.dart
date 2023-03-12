@@ -95,7 +95,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 onTap: () {
                   if (categoryController.selectedcategoryList.value.length >=
                       2) {
-                    Get.to(Dashboard());
+                    Get.to(() => Dashboard());
                   }
                 },
                 child: Center(

@@ -5,7 +5,7 @@ import 'package:digiyug/util/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../template/template_screen.dart';
+import '../Template/template.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -285,7 +285,7 @@ class ListComponent extends StatelessWidget {
   ) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => TemplatePagePage());
+        Get.to(() => Template());
       },
       child: Padding(
         padding: const EdgeInsets.only(right: 8),

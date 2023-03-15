@@ -1,4 +1,3 @@
-
 import 'package:digiyug/routes/router.dart';
 import 'package:digiyug/util/app_constants.dart';
 import 'package:digiyug/util/theme/theme_manager.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 import '../../util/styles.dart';
 
 @GenerateDxRoute(
@@ -22,14 +22,29 @@ class SignIn extends StatefulWidget {
   State<SignIn> createState() => _SignInState();
 }
 
-class _SignInState extends State<SignIn> {
-
+class _SignInState extends State<SignIn> with CodeAutoFill {
   @override
   void initState() {
+    listenOtp();
+    // startTimer();
     super.initState();
-    getMobilePopup();
-
   }
+
+  void listenOtp() async {
+    await SmsAutoFill().unregisterListener();
+    listenForCode();
+    await SmsAutoFill().listenForCode;
+
+    print("OTP listen Called");
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    SmsAutoFill().unregisterListener();
+    super.dispose();
+  }
+
   //fun for show mobile numbers
   Future<void> getMobilePopup() async {
     // try {
@@ -76,7 +91,6 @@ class _SignInState extends State<SignIn> {
   Column _body() {
     return Column(
       children: [
-
         Container(
           width: Get.width,
           height: Get.height,
@@ -90,7 +104,9 @@ class _SignInState extends State<SignIn> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              SizedBox(height: 98,),
+              SizedBox(
+                height: 98,
+              ),
               Expanded(
                 child: Center(
                   child: Container(
@@ -136,7 +152,7 @@ class _SignInState extends State<SignIn> {
                           ),
                         ),
                         Container(
-                          height: Get.height * 0.09,
+                          height: Get.height * 0.07,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(6),
@@ -147,10 +163,8 @@ class _SignInState extends State<SignIn> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: FormBuilderTextField(
-
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly,
-
                                     LengthLimitingTextInputFormatter(10),
                                   ],
                                   style: const TextStyle(
@@ -161,10 +175,9 @@ class _SignInState extends State<SignIn> {
                                   name: 'mobile',
                                   autofocus: false,
                                   autocorrect: false,
-
                                   controller: phoneController,
                                   keyboardType: TextInputType.phone,
-                                  decoration:  InputDecoration(
+                                  decoration: InputDecoration(
                                       errorStyle: robotoBold,
                                       border: InputBorder.none,
                                       hintText: "● ● ● ● ● ● ● ● ● ●",
@@ -223,19 +236,24 @@ class _SignInState extends State<SignIn> {
                               }
                             },
                             child: Center(
-                                child: Container(
-                              width: Get.width,
-                              height: 52,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                    8.0), //Use this code to make rounded corners
-                                color: AppColors.buttonColor,
+                                child: GestureDetector(
+                              onTap: () {
+                                submit();
+                              },
+                              child: Container(
+                                width: Get.width,
+                                height: 52,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      8.0), //Use this code to make rounded corners
+                                  color: AppColors.buttonColor,
+                                ),
+                                child: const Center(
+                                    child: Text(
+                                  "Verify",
+                                  style: robotoBold,
+                                )),
                               ),
-                              child: const Center(
-                                  child: Text(
-                                "Verify",
-                                style: robotoBold,
-                              )),
                             )),
                           ),
                         )
@@ -317,6 +335,21 @@ class _SignInState extends State<SignIn> {
         ),
       ],
     );
+  }
+
+  void submit() async {
+    var appSignatureId = await SmsAutoFill().getAppSignature;
+    Map sendOtpdata = {
+      'mobileNumber': phoneController.text,
+      'appSignatureId': appSignatureId,
+    };
+    print("Sending data for get otp==> ${sendOtpdata}");
+    Get.toNamed(MRouter.otp_screen);
+  }
+
+  @override
+  void codeUpdated() {
+    // TODO: implement codeUpdated
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:digiyug/screens/category/category_list_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class CategoryController extends GetxController {
@@ -60,9 +61,18 @@ class CategoryController extends GetxController {
       });
       categoryList.value[index].isSelected = false;
     } else {
-      categoryList.value[index].isSelected =
-          !categoryList.value[index].isSelected;
-      selectedcategoryList.value.add(categoryList.value[index]);
+      if (selectedcategoryList.value.length < 2) {
+        categoryList.value[index].isSelected =
+            !categoryList.value[index].isSelected;
+        selectedcategoryList.value.add(categoryList.value[index]);
+      } else {
+        Fluttertoast.showToast(
+          msg: "You can't select more then 2 category!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          fontSize: 16.0,
+        );
+      }
     }
   }
 }

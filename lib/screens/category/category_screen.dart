@@ -21,7 +21,7 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   final CategoryController categoryController = Get.put(CategoryController());
-
+  RxInt _selectedIndex = 4.obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +65,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      filterBottomSheet();
+                      showLanguageSheet(context, _selectedIndex);
                     },
                     child: SizedBox(
                       height: Get.height * 0.05,
@@ -110,7 +110,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  if (categoryController.selectedcategoryList.value.length >=
+                  if (categoryController.selectedcategoryList.value.length ==
                       2) {
                     Get.to(() => Dashboard());
                   }
@@ -179,20 +179,20 @@ class _CategoryScreenState extends State<CategoryScreen> {
               alignment: Alignment.topRight,
               child: GestureDetector(
                 onTap: () {
-                  // categoryController.setIsSelected(index);
-                  // setState(() {});
-                  if (categoryController.selectedcategoryList.value.length >
-                      1) {
-                    Fluttertoast.showToast(
-                      msg: "You can't select more then 2 category!",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      fontSize: 16.0,
-                    );
-                  } else {
-                    categoryController.setIsSelected(index);
-                    setState(() {});
-                  }
+                  categoryController.setIsSelected(index);
+                  setState(() {});
+                  // if (categoryController.selectedcategoryList.value.length >
+                  //     1) {
+                    // Fluttertoast.showToast(
+                    //   msg: "You can't select more then 2 category!",
+                    //   toastLength: Toast.LENGTH_SHORT,
+                    //   gravity: ToastGravity.BOTTOM,
+                    //   fontSize: 16.0,
+                    // );
+                  // } else {
+                  //   categoryController.setIsSelected(index);
+                  //   setState(() {});
+                  // }
                 },
                 child: Obx(
                   () => Container(

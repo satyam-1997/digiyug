@@ -4,8 +4,10 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
@@ -300,9 +302,12 @@ class _TemplateState extends State<Template> {
             shareImagePath = file.path.toString();
           });
           log("Saved");
-          Get.showSnackbar(GetSnackBar(
-            title: "Downloaded",
-          ));
+          Fluttertoast.showToast(
+            msg: "Downloaded Successfully!",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            fontSize: 16.0,
+          );
 
           // String downloadsPath = "/storage/emulated/0/Download/my_image.png";
           // file.create(recursive: true);
@@ -310,6 +315,21 @@ class _TemplateState extends State<Template> {
         }
       });
     }
+  }
+
+  final ImagePicker _picker = ImagePicker();
+  XFile? image;
+  File? selectedImage;
+  _handleMediaPermissions() async {
+    var status = Permission.storage.request();
+    if (await status.isGranted || await status.isLimited) {
+      image = (await _picker.pickImage(source: ImageSource.gallery));
+      if (image != null) {
+        selectedImage = File(image!.path);
+        setState(() {});
+      }
+    } else if (await status.isDenied) {
+    } else if (await status.isPermanentlyDenied) {}
   }
 
   Alignment userDetailsAlignmentcard = Alignment.bottomCenter;
@@ -454,19 +474,29 @@ class _TemplateState extends State<Template> {
                           ),
                         ),
                         const Spacer(),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.15,
-                          width: MediaQuery.of(context).size.width * 0.32,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            border: Border.all(
-                              color: profileImageBorderColor,
-                              width: 4.0,
+                        GestureDetector(
+                          onTap: () {
+                            _handleMediaPermissions();
+                          },
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.15,
+                            width: MediaQuery.of(context).size.width * 0.32,
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              border: Border.all(
+                                color: profileImageBorderColor,
+                                width: 4.0,
+                              ),
                             ),
-                          ),
-                          child: const Icon(
-                            Icons.image,
-                            size: 50,
+                            child: selectedImage != null
+                                ? Image.file(
+                                    selectedImage!,
+                                    fit: BoxFit.fill,
+                                  )
+                                : const Icon(
+                                    Icons.image,
+                                    size: 50,
+                                  ),
                           ),
                         ),
                       ],

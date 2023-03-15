@@ -52,6 +52,7 @@ dependencies:
   share_plus: ^6.3.1
   carousel_slider: ^4.2.1
   sms_autofill: ^2.2.0
+  image_picker: ^0.8.6
   fluttertoast: ^8.2.0
   flutter_windowmanager: ^0.2.0
   

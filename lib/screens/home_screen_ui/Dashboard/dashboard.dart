@@ -26,8 +26,7 @@ class _DashboardState extends State<Dashboard> {
   final PageStorageBucket bucket = PageStorageBucket();
 
   Widget currentScreen = HomePage();
-
-  List _selectedIndexs = [];
+  RxInt _selectedIndex = 100.obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,138 +73,7 @@ class _DashboardState extends State<Dashboard> {
                 padding: EdgeInsets.only(right: 15.0),
                 child: GestureDetector(
                   onTap: () {
-                    showModalBottomSheet<void>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Container(
-                          padding: EdgeInsets.all(20.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                'Select Language',
-                                style: TextStyle(
-                                  fontFamily: 'IBMPlexSansHebrewBold',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 20.0,
-                                ),
-                              ),
-                              Text(
-                                'Choose language according to your preference.',
-                                style: TextStyle(
-                                  color: secondaryColorText,
-                                  fontFamily: 'IBMPlexSansHebrewRegular',
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20.0,
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  height: 70.0,
-                                  width: Get.width,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                          'asset/images/RectangleEng.png',
-                                        ),
-                                        fit: BoxFit.fill),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          height: 25.0,
-                                          width: 25.0,
-                                          padding: const EdgeInsets.all(2.0),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1, color: Colors.white),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(100)),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 10.0,
-                                        ),
-                                        Text(
-                                          'English',
-                                          style: TextStyle(
-                                              color: Color(0xffFFFFFF),
-                                              fontSize: 24.0,
-                                              fontFamily:
-                                                  'IBMPlexSansHebrewRegular',
-                                              fontWeight: FontWeight.w500),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20.0,
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  height: 70.0,
-                                  width: Get.width,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                          'asset/images/Rectanglehind.png',
-                                        ),
-                                        fit: BoxFit.fill),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                  ),
-                                  child: InkWell(
-                                    hoverColor: secondaryColorText,
-                                    onTap: () {},
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            height: 25.0,
-                                            width: 25.0,
-                                            padding: const EdgeInsets.all(2.0),
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  width: 1,
-                                                  color: Colors.white),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(100)),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 10.0,
-                                          ),
-                                          Text(
-                                            'हिंदी',
-                                            style: TextStyle(
-                                                color: Color(0xffFFFFFF),
-                                                fontSize: 24.0,
-                                                fontFamily:
-                                                    'IBMPlexSansHebrewRegular',
-                                                fontWeight: FontWeight.w500),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                    );
+                    showLanguageSheet(context, _selectedIndex);
                   },
                   child: Image.asset("asset/images/GoogleTranslate.png"),
                 ),
@@ -487,82 +355,247 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 }
-    // Widget getBody() {
-  //   List<Widget> pages = [
-  //     HomePage(),
-  //     OnSpot(),
-  //     Subscriptions(),
-  //     Template(),
-  //     Profile()
-  //   ];
-  //   return IndexedStack(
-  //     index: _currentIndex,
-  //     children: pages,
-  //   );
-  // }
+// Widget getBody() {
+//   List<Widget> pages = [
+//     HomePage(),
+//     OnSpot(),
+//     Subscriptions(),
+//     Template(),
+//     Profile()
+//   ];
+//   return IndexedStack(
+//     index: _currentIndex,
+//     children: pages,
+//   );
+// }
 
-  // Widget _buildBottomBar() {
-  //   return CustomAnimatedBottomBar(
-  //     containerHeight: 70,
-  //     backgroundColor: Colors.white,
-  //     selectedIndex: _currentIndex,
-  //     showElevation: true,
-  //     itemCornerRadius: 24,
-  //     curve: Curves.easeIn,
-  //     onItemSelected: (index) => setState(() => _currentIndex = index),
-  //     items: <BottomNavyBarItem>[
-  //       BottomNavyBarItem(
-  //         icon: Icon(Icons.apps),
-  //         title: Text('Home'),
-  //         activeColor: Colors.green,
-  //         inactiveColor: _inactiveColor,
-  //         textAlign: TextAlign.center,
-  //       ),
-  //       BottomNavyBarItem(
-  //         icon: Icon(Icons.people),
-  //         title: Text('Users'),
-  //         activeColor: Colors.purpleAccent,
-  //         inactiveColor: _inactiveColor,
-  //         textAlign: TextAlign.center,
-  //       ),
-  //       BottomNavyBarItem(
-  //         icon: Icon(Icons.message),
-  //         title: Text(
-  //           'Messages ',
-  //         ),
-  //         activeColor: Colors.pink,
-  //         inactiveColor: _inactiveColor,
-  //         textAlign: TextAlign.center,
-  //       ),
-  //       BottomNavyBarItem(
-  //         icon: Icon(Icons.settings),
-  //         title: Text('Settings'),
-  //         activeColor: Colors.blue,
-  //         inactiveColor: _inactiveColor,
-  //         textAlign: TextAlign.center,
-  //       ),
-  //     ],
-  //   );
+// Widget _buildBottomBar() {
+//   return CustomAnimatedBottomBar(
+//     containerHeight: 70,
+//     backgroundColor: Colors.white,
+//     selectedIndex: _currentIndex,
+//     showElevation: true,
+//     itemCornerRadius: 24,
+//     curve: Curves.easeIn,
+//     onItemSelected: (index) => setState(() => _currentIndex = index),
+//     items: <BottomNavyBarItem>[
+//       BottomNavyBarItem(
+//         icon: Icon(Icons.apps),
+//         title: Text('Home'),
+//         activeColor: Colors.green,
+//         inactiveColor: _inactiveColor,
+//         textAlign: TextAlign.center,
+//       ),
+//       BottomNavyBarItem(
+//         icon: Icon(Icons.people),
+//         title: Text('Users'),
+//         activeColor: Colors.purpleAccent,
+//         inactiveColor: _inactiveColor,
+//         textAlign: TextAlign.center,
+//       ),
+//       BottomNavyBarItem(
+//         icon: Icon(Icons.message),
+//         title: Text(
+//           'Messages ',
+//         ),
+//         activeColor: Colors.pink,
+//         inactiveColor: _inactiveColor,
+//         textAlign: TextAlign.center,
+//       ),
+//       BottomNavyBarItem(
+//         icon: Icon(Icons.settings),
+//         title: Text('Settings'),
+//         activeColor: Colors.blue,
+//         inactiveColor: _inactiveColor,
+//         textAlign: TextAlign.center,
+//       ),
+//     ],
+//   );
 
-   // body: getBody(),
-      // bottomNavigationBar: _buildBottomBar(),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
-      // floatingActionButton: SizedBox(
-      //   height: 100,
-      //   width: 100,
-      //   child: Column(
-      //     children: [
-      //       FloatingActionButton(
-      //         child: Icon(Icons.add), //child widget inside this button
-      //         shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
-      //         onPressed: () {
-      //           print("Button is pressed.");
-      //           //task to execute when this button is pressed
-      //         },
-      //       ),
-      //       Text('sdfghjk')
-      //     ],
-      //   ),
-      // ),
-      // backgroundColor: Colors.blue[100], //background color of scaffold
-  // }
+// body: getBody(),
+// bottomNavigationBar: _buildBottomBar(),
+// floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+// floatingActionButton: SizedBox(
+//   height: 100,
+//   width: 100,
+//   child: Column(
+//     children: [
+//       FloatingActionButton(
+//         child: Icon(Icons.add), //child widget inside this button
+//         shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
+//         onPressed: () {
+//           print("Button is pressed.");
+//           //task to execute when this button is pressed
+//         },
+//       ),
+//       Text('sdfghjk')
+//     ],
+//   ),
+// ),
+// backgroundColor: Colors.blue[100], //background color of scaffold
+// }
+showLanguageSheet(BuildContext context, RxInt _selectedIndex) {
+  showModalBottomSheet<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return Container(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Select Language',
+              style: TextStyle(
+                fontFamily: 'IBMPlexSansHebrewBold',
+                fontWeight: FontWeight.w500,
+                fontSize: 20.0,
+              ),
+            ),
+            Text(
+              'Choose language according to your preference.',
+              style: TextStyle(
+                color: secondaryColorText,
+                fontFamily: 'IBMPlexSansHebrewRegular',
+              ),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            GestureDetector(
+              onTap: () {
+                if (_selectedIndex.value == 0) {
+                  _selectedIndex.value = 4;
+                } else {
+                  _selectedIndex.value = 0;
+                }
+              },
+              child: Container(
+                height: 70.0,
+                width: Get.width,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        'asset/images/RectangleEng.png',
+                      ),
+                      fit: BoxFit.fill),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    children: [
+                      Obx(
+                        () => Container(
+                          height: 25.0,
+                          width: 25.0,
+                          padding: const EdgeInsets.all(2.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1,
+                              color: Colors.white,
+                            ),
+                            shape: BoxShape.circle,
+                          ),
+                          child: _selectedIndex.value == 0
+                              ? Center(
+                                  child: Container(
+                                    height: 24.9,
+                                    width: 24.9,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: primaryColor),
+                                  ),
+                                )
+                              : SizedBox(),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Text(
+                        'English',
+                        style: TextStyle(
+                            color: Color(0xffFFFFFF),
+                            fontSize: 24.0,
+                            fontFamily: 'IBMPlexSansHebrewRegular',
+                            fontWeight: FontWeight.w500),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            GestureDetector(
+              onTap: () {
+                if (_selectedIndex.value == 1) {
+                  _selectedIndex.value = 4;
+                } else {
+                  _selectedIndex.value = 1;
+                }
+              },
+              child: Container(
+                height: 70.0,
+                width: Get.width,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        'asset/images/Rectanglehind.png',
+                      ),
+                      fit: BoxFit.fill),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    children: [
+                      Obx(
+                        () => Container(
+                          height: 25.0,
+                          width: 25.0,
+                          padding: const EdgeInsets.all(2.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1,
+                              color: Colors.white,
+                            ),
+                            shape: BoxShape.circle,
+                          ),
+                          child: _selectedIndex.value == 1
+                              ? Center(
+                                  child: Container(
+                                    height: 24.9,
+                                    width: 24.9,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: primaryColor),
+                                  ),
+                                )
+                              : SizedBox(),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Text(
+                        'हिंदी',
+                        style: TextStyle(
+                            color: Color(0xffFFFFFF),
+                            fontSize: 24.0,
+                            fontFamily: 'IBMPlexSansHebrewRegular',
+                            fontWeight: FontWeight.w500),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}

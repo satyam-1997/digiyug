@@ -194,23 +194,18 @@ class ListComponent extends StatelessWidget {
                       height: Get.height * 0.22,
                       width: Get.width,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Expanded(
-                            flex: 1,
-                            child: _individualGrids(
-                              0,
-                              "Some text",
-                              "asset/images/common_people.png",
-                            ),
+                          _individualGrids(
+                            0,
+                            "Some text",
+                            "asset/images/common_people.png",
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: _individualGrids(
-                              0,
-                              "Some text",
-                              "asset/images/co-operative.png",
-                            ),
+                          Spacer(),
+                          _individualGrids(
+                            0,
+                            "Some text",
+                            "asset/images/co-operative.png",
                           ),
                         ],
                       ),
@@ -291,7 +286,7 @@ class ListComponent extends StatelessWidget {
         padding: const EdgeInsets.only(right: 8),
         child: Container(
           height: Get.height * 0.2,
-          width: Get.width * 0.43,
+          width: Get.width * 0.435,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
           ),

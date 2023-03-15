@@ -5,7 +5,9 @@ import 'package:dx_generator/dx_generator.dart';
 import 'package:dx_router/dx_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../util/styles.dart';
 import '../home_screen_ui/Common/constants.dart';
 
@@ -33,7 +35,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: Get.height * 0.01,
+                height: 24,
+              ),
+              SizedBox(
+                height: Get.height * 0.02,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,21 +46,21 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      // const Text(
+                      //   "Choose your language and \ncategory type",
+                      //   style: TextStyle(
+                      //       fontSize: Dimens.font_16sp,
+                      //       fontWeight: FontWeight.w700),
+                      // ),
+                      Text(
                         "Choose your language and \ncategory type",
-                        style: TextStyle(
-                            fontSize: Dimens.font_16sp,
-                            fontWeight: FontWeight.w700),
+                        style: GoogleFonts.ibmPlexSans(
+                          fontWeight: FontWeight.w700,
+                          fontSize: Dimens.font_20sp,
+                          color: Colors.black,
+                          letterSpacing: 0,
+                        ),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.015,
-                      ),
-                      const Text(
-                        "Select at least two categories",
-                        style: TextStyle(
-                            fontSize: Dimens.font_14sp,
-                            fontWeight: FontWeight.w400),
-                      )
                     ],
                   ),
                   GestureDetector(
@@ -63,15 +68,27 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       filterBottomSheet();
                     },
                     child: SizedBox(
-                      height: Get.height * 0.08,
-                      width: Get.width * 0.12,
+                      height: Get.height * 0.05,
+                      width: Get.width * 0.14,
                       // color: Colors.black,
-                      child: Image.asset(
-                        "asset/images/language.jpg",
+                      child: SvgPicture.asset(
+                        "asset/images/language-translation.svg",
                       ),
                     ),
                   ),
                 ],
+              ),
+              SizedBox(
+                height: Get.height * 0.015,
+              ),
+              Text(
+                "Select two categories",
+                style: GoogleFonts.ibmPlexSans(
+                  fontWeight: FontWeight.w500,
+                  fontSize: Dimens.font_18sp,
+                  color: Colors.black54,
+                  letterSpacing: 1,
+                ),
               ),
               SizedBox(
                 height: Get.height * 0.03,
@@ -128,10 +145,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   _individualGrids(int index) {
     return Container(
-      height: Get.height * 0.2,
+      height: Get.height * 0.2 + 4,
       width: Get.width * 0.43,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Stack(
         children: [
@@ -140,6 +157,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
               Container(
                 height: Get.height * 0.2,
                 width: Get.width * 0.43,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                ),
                 child: Image.asset(
                   "asset/images/${categoryController.categoryList.value[index].svgPath.toString()}",
                   fit: BoxFit.fill,
@@ -159,8 +179,20 @@ class _CategoryScreenState extends State<CategoryScreen> {
               alignment: Alignment.topRight,
               child: GestureDetector(
                 onTap: () {
-                  categoryController.setIsSelected(index);
-                  setState(() {});
+                  // categoryController.setIsSelected(index);
+                  // setState(() {});
+                  if (categoryController.selectedcategoryList.value.length >
+                      1) {
+                    Fluttertoast.showToast(
+                      msg: "You can't select more then 2 category!",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      fontSize: 16.0,
+                    );
+                  } else {
+                    categoryController.setIsSelected(index);
+                    setState(() {});
+                  }
                 },
                 child: Obx(
                   () => Container(
@@ -168,12 +200,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     width: Get.width * 0.08,
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(6),
                         border: Border.all()),
                     child:
                         categoryController.categoryList.value[index].isSelected
                             ? Padding(
-                                padding: EdgeInsets.all(2),
+                                padding: EdgeInsets.all(4),
                                 child: Container(
                                   color: Color(0xffA21B31),
                                 ),
@@ -184,17 +216,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ),
             ),
           ),
-          //word
+          //WORD
           Align(
             alignment: Alignment.bottomRight,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 10, right: 10),
               child: Text(
                 categoryController.categoryList.value[index].name,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
+                style: GoogleFonts.ibmPlexSans(
+                  fontWeight: FontWeight.w700,
                   fontSize: Dimens.font_16sp,
+                  color: Colors.white,
+                  letterSpacing: 0,
                 ),
               ),
             ),
@@ -209,24 +242,31 @@ class _CategoryScreenState extends State<CategoryScreen> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          padding: EdgeInsets.all(20.0),
+          color: Colors.white10,
+          padding: EdgeInsets.all(28.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              SizedBox(
+                height: 24,
+              ),
               Text(
                 'Select Language',
-                style: TextStyle(
-                  fontFamily: 'IBMPlexSansHebrewBold',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20.0,
+                style: GoogleFonts.ibmPlexSans(
+                  fontWeight: FontWeight.w600,
+                  fontSize: Dimens.font_20sp,
+                  color: Colors.black,
+                  letterSpacing: 0,
                 ),
               ),
               Text(
                 'Choose language according to your preference.',
-                style: TextStyle(
-                  color: secondaryColorText,
-                  fontFamily: 'IBMPlexSansHebrewRegular',
+                style: GoogleFonts.ibmPlexSans(
+                  fontWeight: FontWeight.w700,
+                  fontSize: Dimens.font_14sp,
+                  color: Colors.black54,
+                  letterSpacing: 0,
                 ),
               ),
               SizedBox(

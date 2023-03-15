@@ -300,6 +300,9 @@ class _TemplateState extends State<Template> {
             shareImagePath = file.path.toString();
           });
           log("Saved");
+          Get.showSnackbar(GetSnackBar(
+            title: "Downloaded",
+          ));
 
           // String downloadsPath = "/storage/emulated/0/Download/my_image.png";
           // file.create(recursive: true);

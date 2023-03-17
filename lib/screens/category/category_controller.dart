@@ -1,6 +1,12 @@
+import 'dart:developer';
+
 import 'package:digiyug/screens/category/category_list_model.dart';
+import 'package:digiyug/util/theme/theme_manager.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:onboarding_overlay/onboarding_overlay.dart';
 
 class CategoryController extends GetxController {
   Rx<List<CategoryModel>> categoryList = Rx<List<CategoryModel>>([]);
@@ -8,13 +14,91 @@ class CategoryController extends GetxController {
   RxBool isEnglishSelected = false.obs;
   RxBool isHindiSelected = false.obs;
   RxBool isLangSelected = false.obs;
+  final List<FocusNode> overlayKeys = <FocusNode>[
+    FocusNode(),
+  ];
+  final List<OnboardingStep> steps = [];
+  final GlobalKey<OnboardingState> onboardingKey = GlobalKey<OnboardingState>();
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     assignCatList();
+    steps.add(
+      OnboardingStep(
+          focusNode: overlayKeys[0],
+          titleTextStyle: Theme.of(Get.context!).textTheme.headline5,
+          overlayColor: Colors.black.withOpacity(0.5),
+          titleText: "",
+          arrowPosition: ArrowPosition.top,
+          onTapCallback: (area, next, close) {
+            if (area == TapArea.overlay || area == TapArea.label) {
+              onboardingKey.currentState!.hide();
+            }
+          },
+          stepBuilder: (
+            BuildContext context,
+            OnboardingStepRenderInfo renderInfo,
+          ) {
+            return Material(
+              color: Colors.transparent,
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SvgPicture.asset(
+                          "asset/arrow_svg.svg",
+                        ),
+                        SizedBox(
+                          width: Get.width * 0.07,
+                        )
+                      ],
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: Get.height * 0.1,
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.1,
+                            ),
+                            Text(
+                              "Select Language",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 28,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          }),
+    );
   }
+  //
+  //  Text(
+  //                       "Select Language",
+  //                       style: TextStyle(
+  //                         color: Colors.white,
+  //                         fontWeight: FontWeight.w600,
+  //                         fontSize: Dimens.font_28sp,
+  //                       ),
+  //                     ),//
 
   assignCatList() {
     categoryList.value = [

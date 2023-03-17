@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../util/styles.dart';
+import '../../../util/theme/theme_manager.dart';
 import '../Common/constants.dart';
 import '../navigationbarItems/Home/home.dart';
 import '../navigationbarItems/Profile/profile.dart';
@@ -437,164 +439,216 @@ class _DashboardState extends State<Dashboard> {
 showLanguageSheet(BuildContext context, RxInt _selectedIndex) {
   showModalBottomSheet<void>(
     context: context,
+    constraints: BoxConstraints(
+      minWidth: Get.width,
+      maxWidth: Get.width,
+      minHeight: 0.0,
+      maxHeight: Get.height / 1.85,
+    ),
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
     builder: (BuildContext context) {
-      return Container(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Select Language',
-              style: TextStyle(
-                fontFamily: 'IBMPlexSansHebrewBold',
-                fontWeight: FontWeight.w500,
-                fontSize: 20.0,
-              ),
-            ),
-            Text(
-              'Choose language according to your preference.',
-              style: TextStyle(
-                color: secondaryColorText,
-                fontFamily: 'IBMPlexSansHebrewRegular',
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            GestureDetector(
+      return Column(
+        children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: GestureDetector(
               onTap: () {
-                if (_selectedIndex.value == 0) {
-                  _selectedIndex.value = 4;
-                } else {
-                  _selectedIndex.value = 0;
-                }
+                Navigator.pop(context);
               },
-              child: Container(
-                height: 70.0,
-                width: Get.width,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        'asset/images/RectangleEng.png',
-                      ),
-                      fit: BoxFit.fill),
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    children: [
-                      Obx(
-                        () => Container(
-                          height: 25.0,
-                          width: 25.0,
-                          padding: const EdgeInsets.all(2.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 1,
-                              color: Colors.white,
-                            ),
-                            shape: BoxShape.circle,
-                          ),
-                          child: _selectedIndex.value == 0
-                              ? Center(
-                                  child: Container(
-                                    height: 24.9,
-                                    width: 24.9,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: primaryColor),
-                                  ),
-                                )
-                              : SizedBox(),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Text(
-                        'English',
-                        style: TextStyle(
-                            color: Color(0xffFFFFFF),
-                            fontSize: 24.0,
-                            fontFamily: 'IBMPlexSansHebrewRegular',
-                            fontWeight: FontWeight.w500),
-                      )
-                    ],
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Center(
+                    child: Icon(
+                  Icons.close,
+                  color: Colors.black,
+                )),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: Get.height * 0.03,
+          ),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Select Language',
+                  style: TextStyle(
+                    fontFamily: 'IBMPlexSansHebrewBold',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20.0,
                   ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            GestureDetector(
-              onTap: () {
-                if (_selectedIndex.value == 1) {
-                  _selectedIndex.value = 4;
-                } else {
-                  _selectedIndex.value = 1;
-                }
-              },
-              child: Container(
-                height: 70.0,
-                width: Get.width,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        'asset/images/Rectanglehind.png',
-                      ),
-                      fit: BoxFit.fill),
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                SizedBox(
+                  height: Get.height * 0.01,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    children: [
-                      Obx(
-                        () => Container(
-                          height: 25.0,
-                          width: 25.0,
-                          padding: const EdgeInsets.all(2.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 1,
-                              color: Colors.white,
-                            ),
-                            shape: BoxShape.circle,
-                          ),
-                          child: _selectedIndex.value == 1
-                              ? Center(
-                                  child: Container(
-                                    height: 24.9,
-                                    width: 24.9,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: primaryColor),
-                                  ),
-                                )
-                              : SizedBox(),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Text(
-                        'हिंदी',
-                        style: TextStyle(
-                            color: Color(0xffFFFFFF),
-                            fontSize: 24.0,
-                            fontFamily: 'IBMPlexSansHebrewRegular',
-                            fontWeight: FontWeight.w500),
-                      )
-                    ],
+                Text(
+                  'Choose language according to your preference.',
+                  style: TextStyle(
+                    color: secondaryColorText,
+                    fontFamily: 'IBMPlexSansHebrewRegular',
                   ),
                 ),
-              ),
+                SizedBox(
+                  height: Get.height * 0.02,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    if (_selectedIndex.value == 0) {
+                      _selectedIndex.value = 4;
+                    } else {
+                      _selectedIndex.value = 0;
+                    }
+                  },
+                  child: Container(
+                    height: 70.0,
+                    width: Get.width,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                            'asset/images/RectangleEng.png',
+                          ),
+                          fit: BoxFit.fill),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Row(
+                        children: [
+                          Obx(
+                            () => Container(
+                              height: 25.0,
+                              width: 25.0,
+                              padding: const EdgeInsets.all(2.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: Colors.white,
+                                ),
+                                shape: BoxShape.circle,
+                              ),
+                              child: _selectedIndex.value == 0
+                                  ? Center(
+                                      child: Container(
+                                        height: 24.9,
+                                        width: 24.9,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: primaryColor),
+                                      ),
+                                    )
+                                  : SizedBox(),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text(
+                            'English',
+                            style: TextStyle(
+                                color: Color(0xffFFFFFF),
+                                fontSize: 24.0,
+                                fontFamily: 'IBMPlexSansHebrewRegular',
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height * 0.03,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    if (_selectedIndex.value == 1) {
+                      _selectedIndex.value = 4;
+                    } else {
+                      _selectedIndex.value = 1;
+                    }
+                  },
+                  child: Container(
+                    height: 70.0,
+                    width: Get.width,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                            'asset/images/Rectanglehind.png',
+                          ),
+                          fit: BoxFit.fill),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Row(
+                        children: [
+                          Obx(
+                            () => Container(
+                              height: 25.0,
+                              width: 25.0,
+                              padding: const EdgeInsets.all(2.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: Colors.white,
+                                ),
+                                shape: BoxShape.circle,
+                              ),
+                              child: _selectedIndex.value == 1
+                                  ? Center(
+                                      child: Container(
+                                        height: 24.9,
+                                        width: 24.9,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: primaryColor),
+                                      ),
+                                    )
+                                  : SizedBox(),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text(
+                            'हिंदी',
+                            style: TextStyle(
+                                color: Color(0xffFFFFFF),
+                                fontSize: 24.0,
+                                fontFamily: 'IBMPlexSansHebrewRegular',
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height * 0.05,
+                ),
+                Container(
+                  width: Get.width,
+                  height: 52,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                        8.0), //Use this code to make rounded corners
+                    color: AppColors.buttonColor,
+                  ),
+                  child: const Center(
+                      child: Text(
+                    "Select",
+                    style: robotoBold,
+                  )),
+                )
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       );
     },
   );

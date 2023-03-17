@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeManager.appTheme,
       locale: const Locale('en', 'US'),
       onGenerateRoute: MRouter.generateRoute,
+    
       initialRoute: MRouter.splashRoute,
       debugShowCheckedModeBanner: false,
     );

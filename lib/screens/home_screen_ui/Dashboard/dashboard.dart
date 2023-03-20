@@ -1,9 +1,6 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
 import '../../../util/styles.dart';
 import '../../../util/theme/theme_manager.dart';
 import '../Common/constants.dart';
@@ -21,7 +18,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  int currentTab = 0;
+  RxInt currentTab = 0.obs;
 
   final List<Widget> pages = [HomePage(), Template(), OnSpot(), Profile()];
 
@@ -92,52 +89,109 @@ class _DashboardState extends State<Dashboard> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: PageStorage(
-        bucket: bucket,
-        child: currentScreen,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: SizedBox(
-        height: 43.0,
-        width: 43.0,
-        child: FloatingActionButton(
-          backgroundColor: primaryColor,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Subscriptions()),
-            );
-          },
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0))),
-          child: SvgPicture.asset(
-            "asset/images/floatbutton.svg",
-            height: 29.0,
-            width: 29.0,
+      body: Obx(() => Stack(children: [
+            Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: Get.height,
+                    child: pages[currentTab.value],
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height * 0.1,
+                )
+              ],
+            ),
+            Align(alignment: Alignment.bottomCenter, child: bottomNavBar())
+          ])),
+    );
+  }
+
+  Widget bottomNavBar() {
+    return Container(
+      height: Get.height * 0.095,
+      color: Colors.transparent,
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: Get.height * 0.08,
+              width: Get.width,
+              color: Colors.transparent,
+              child: oldBottomBar(),
+            ),
           ),
-        ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Obx(
+              () => Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    (currentTab.value == 1)
+                        ? SizedBox(
+                            width: Get.width * 0.1,
+                          )
+                        : SizedBox(),
+                    SizedBox(
+                      height: 43.0,
+                      width: 43.0,
+                      child: FloatingActionButton(
+                        backgroundColor: primaryColor,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Subscriptions()),
+                          );
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0))),
+                        child: SvgPicture.asset(
+                          "asset/images/floatbutton.svg",
+                          height: 29.0,
+                          width: 29.0,
+                        ),
+                      ),
+                    ),
+                    (currentTab.value == 2)
+                        ? SizedBox(
+                            width: Get.width * 0.2,
+                          )
+                        : SizedBox(),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 10,
-        child: SizedBox(
-          height: 69.0,
-          child: Row(
-            //  mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    );
+  }
+
+  Widget oldBottomBar() {
+    return BottomAppBar(
+      child: SizedBox(
+        height: Get.height * 0.08,
+        child: Row(
+          //  mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   MaterialButton(
                     onPressed: () {
-                      setState(() {
-                        currentScreen = HomePage();
-                        currentTab = 0;
-                      });
+                      currentTab.value = 0;
                     },
                     minWidth: 40.0,
-                    child: currentTab == 0
+                    child: currentTab.value == 0
                         ? Container(
                             height: 38.0,
                             width: 90.0,
@@ -180,13 +234,10 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   MaterialButton(
                     onPressed: () {
-                      setState(() {
-                        currentScreen = Template();
-                        currentTab = 1;
-                      });
+                      currentTab.value = 1;
                     },
                     minWidth: 40.0,
-                    child: currentTab == 1
+                    child: currentTab.value == 1
                         ? Container(
                             height: 38.0,
                             width: 100.0,
@@ -229,213 +280,129 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ],
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MaterialButton(
-                    onPressed: () {
-                      setState(() {
-                        currentScreen = OnSpot();
-                        currentTab = 2;
-                      });
-                    },
-                    minWidth: 40.0,
-                    child: currentTab == 2
-                        ? Container(
-                            height: 38.0,
-                            width: 100.0,
-                            padding: EdgeInsets.all(5.0),
-                            alignment: Alignment.center,
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5.0)),
-                              color: lightShadeBackground,
-                            ),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                    height: 26.0,
-                                    width: 26.0,
-                                    child: SvgPicture.asset(
-                                      "asset/images/onspot.svg",
-                                      color: primaryColor,
-                                    )),
-                                Container(
-                                  padding: EdgeInsets.only(left: 10.0),
-                                  child: const Text(
-                                    'onSpot',
-                                    style: TextStyle(
-                                        fontFamily: 'IBMPlexSansHebrewRegular',
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13.0,
-                                        color: primaryColor),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : SizedBox(
-                            height: 27.0,
-                            width: 27.0,
-                            child: SvgPicture.asset(
-                              "asset/images/onspot.svg",
-                              color: Colors.black,
-                            )),
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      setState(() {
-                        currentScreen = Profile();
-                        currentTab = 3;
-                      });
-                    },
-                    minWidth: 40.0,
-                    child: currentTab == 3
-                        ? Container(
-                            height: 38.0,
-                            width: 100.0,
-                            padding: EdgeInsets.all(5.0),
-                            alignment: Alignment.center,
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5.0)),
-                              color: lightShadeBackground,
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: currentTab == 3
-                                        ? Border.all(
-                                            color: primaryColor,
-                                          )
-                                        : null,
-                                  ),
-                                  height: 28.0,
-                                  width: 28.0,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(2.0),
-                                    child: Image.asset(
-                                      "asset/images/Ellipse.png",
-                                      // color: primaryColor,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(left: 10.0),
-                                  child: const Text(
-                                    'Profile',
-                                    style: TextStyle(
-                                        fontFamily: 'IBMPlexSansHebrewRegular',
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13.0,
-                                        color: primaryColor),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : SizedBox(
-                            height: 27.0,
-                            width: 27.0,
-                            child: Image.asset(
-                              "asset/images/Ellipse.png",
-                              // color: secondaryColorText,
-                            ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                MaterialButton(
+                  onPressed: () {
+                    currentTab.value = 2;
+                  },
+                  minWidth: 40.0,
+                  child: currentTab.value == 2
+                      ? Container(
+                          height: 38.0,
+                          width: 100.0,
+                          padding: EdgeInsets.all(5.0),
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(5.0)),
+                            color: lightShadeBackground,
                           ),
-                  )
-                ],
-              ),
-            ],
-          ),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                  height: 26.0,
+                                  width: 26.0,
+                                  child: SvgPicture.asset(
+                                    "asset/images/onspot.svg",
+                                    color: primaryColor,
+                                  )),
+                              Container(
+                                padding: EdgeInsets.only(left: 10.0),
+                                child: const Text(
+                                  'onSpot',
+                                  style: TextStyle(
+                                      fontFamily: 'IBMPlexSansHebrewRegular',
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13.0,
+                                      color: primaryColor),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : SizedBox(
+                          height: 27.0,
+                          width: 27.0,
+                          child: SvgPicture.asset(
+                            "asset/images/onspot.svg",
+                            color: Colors.black,
+                          )),
+                ),
+                MaterialButton(
+                  onPressed: () {
+                    currentTab.value = 3;
+                  },
+                  minWidth: 40.0,
+                  child: currentTab.value == 3
+                      ? Container(
+                          height: 38.0,
+                          width: 100.0,
+                          padding: EdgeInsets.all(5.0),
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(5.0)),
+                            color: lightShadeBackground,
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: currentTab == 3
+                                      ? Border.all(
+                                          color: primaryColor,
+                                        )
+                                      : null,
+                                ),
+                                height: 28.0,
+                                width: 28.0,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Image.asset(
+                                    "asset/images/Ellipse.png",
+                                    // color: primaryColor,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(left: 10.0),
+                                child: const Text(
+                                  'Profile',
+                                  style: TextStyle(
+                                      fontFamily: 'IBMPlexSansHebrewRegular',
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13.0,
+                                      color: primaryColor),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : SizedBox(
+                          height: 27.0,
+                          width: 27.0,
+                          child: Image.asset(
+                            "asset/images/Ellipse.png",
+                            // color: secondaryColorText,
+                          ),
+                        ),
+                )
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
 }
-// Widget getBody() {
-//   List<Widget> pages = [
-//     HomePage(),
-//     OnSpot(),
-//     Subscriptions(),
-//     Template(),
-//     Profile()
-//   ];
-//   return IndexedStack(
-//     index: _currentIndex,
-//     children: pages,
-//   );
-// }
 
-// Widget _buildBottomBar() {
-//   return CustomAnimatedBottomBar(
-//     containerHeight: 70,
-//     backgroundColor: Colors.white,
-//     selectedIndex: _currentIndex,
-//     showElevation: true,
-//     itemCornerRadius: 24,
-//     curve: Curves.easeIn,
-//     onItemSelected: (index) => setState(() => _currentIndex = index),
-//     items: <BottomNavyBarItem>[
-//       BottomNavyBarItem(
-//         icon: Icon(Icons.apps),
-//         title: Text('Home'),
-//         activeColor: Colors.green,
-//         inactiveColor: _inactiveColor,
-//         textAlign: TextAlign.center,
-//       ),
-//       BottomNavyBarItem(
-//         icon: Icon(Icons.people),
-//         title: Text('Users'),
-//         activeColor: Colors.purpleAccent,
-//         inactiveColor: _inactiveColor,
-//         textAlign: TextAlign.center,
-//       ),
-//       BottomNavyBarItem(
-//         icon: Icon(Icons.message),
-//         title: Text(
-//           'Messages ',
-//         ),
-//         activeColor: Colors.pink,
-//         inactiveColor: _inactiveColor,
-//         textAlign: TextAlign.center,
-//       ),
-//       BottomNavyBarItem(
-//         icon: Icon(Icons.settings),
-//         title: Text('Settings'),
-//         activeColor: Colors.blue,
-//         inactiveColor: _inactiveColor,
-//         textAlign: TextAlign.center,
-//       ),
-//     ],
-//   );
-
-// body: getBody(),
-// bottomNavigationBar: _buildBottomBar(),
-// floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
-// floatingActionButton: SizedBox(
-//   height: 100,
-//   width: 100,
-//   child: Column(
-//     children: [
-//       FloatingActionButton(
-//         child: Icon(Icons.add), //child widget inside this button
-//         shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
-//         onPressed: () {
-//           print("Button is pressed.");
-//           //task to execute when this button is pressed
-//         },
-//       ),
-//       Text('sdfghjk')
-//     ],
-//   ),
-// ),
-// backgroundColor: Colors.blue[100], //background color of scaffold
-// }
 showLanguageSheet(BuildContext context, RxInt _selectedIndex) {
   showModalBottomSheet<void>(
     context: context,
@@ -653,3 +620,82 @@ showLanguageSheet(BuildContext context, RxInt _selectedIndex) {
     },
   );
 }
+// Widget getBody() {
+//   List<Widget> pages = [
+//     HomePage(),
+//     OnSpot(),
+//     Subscriptions(),
+//     Template(),
+//     Profile()
+//   ];
+//   return IndexedStack(
+//     index: _currentIndex,
+//     children: pages,
+//   );
+// }
+
+// Widget _buildBottomBar() {
+//   return CustomAnimatedBottomBar(
+//     containerHeight: 70,
+//     backgroundColor: Colors.white,
+//     selectedIndex: _currentIndex,
+//     showElevation: true,
+//     itemCornerRadius: 24,
+//     curve: Curves.easeIn,
+//     onItemSelected: (index) => setState(() => _currentIndex = index),
+//     items: <BottomNavyBarItem>[
+//       BottomNavyBarItem(
+//         icon: Icon(Icons.apps),
+//         title: Text('Home'),
+//         activeColor: Colors.green,
+//         inactiveColor: _inactiveColor,
+//         textAlign: TextAlign.center,
+//       ),
+//       BottomNavyBarItem(
+//         icon: Icon(Icons.people),
+//         title: Text('Users'),
+//         activeColor: Colors.purpleAccent,
+//         inactiveColor: _inactiveColor,
+//         textAlign: TextAlign.center,
+//       ),
+//       BottomNavyBarItem(
+//         icon: Icon(Icons.message),
+//         title: Text(
+//           'Messages ',
+//         ),
+//         activeColor: Colors.pink,
+//         inactiveColor: _inactiveColor,
+//         textAlign: TextAlign.center,
+//       ),
+//       BottomNavyBarItem(
+//         icon: Icon(Icons.settings),
+//         title: Text('Settings'),
+//         activeColor: Colors.blue,
+//         inactiveColor: _inactiveColor,
+//         textAlign: TextAlign.center,
+//       ),
+//     ],
+//   );
+
+// body: getBody(),
+// bottomNavigationBar: _buildBottomBar(),
+// floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+// floatingActionButton: SizedBox(
+//   height: 100,
+//   width: 100,
+//   child: Column(
+//     children: [
+//       FloatingActionButton(
+//         child: Icon(Icons.add), //child widget inside this button
+//         shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
+//         onPressed: () {
+//           print("Button is pressed.");
+//           //task to execute when this button is pressed
+//         },
+//       ),
+//       Text('sdfghjk')
+//     ],
+//   ),
+// ),
+// backgroundColor: Colors.blue[100], //background color of scaffold
+// }

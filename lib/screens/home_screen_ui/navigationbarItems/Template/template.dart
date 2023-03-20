@@ -288,7 +288,7 @@ class _TemplateState extends State<Template> {
         await Permission.storage.request().isLimited) {
       RenderRepaintBoundary boundary =
           globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      var image = await boundary.toImage();
+      var image = await boundary.toImage(pixelRatio: 4);
       ByteData? byteData = await image.toByteData(format: ImageByteFormat.png);
       Uint8List pngBytes = byteData!.buffer.asUint8List();
       Directory appDocDir = await getApplicationDocumentsDirectory();

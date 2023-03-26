@@ -1,3 +1,4 @@
+import 'package:digiyug/screens/plans/plans_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,12 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   RxInt currentTab = 0.obs;
 
-  final List<Widget> pages = [HomePage(), Template(), OnSpot(), Profile()];
+  final List<Widget> pages = [
+    HomePage(),
+    Template(),
+    OnSpot(),
+    DigiyugProfile(),
+  ];
 
   final PageStorageBucket bucket = PageStorageBucket();
 
@@ -89,7 +95,9 @@ class _DashboardState extends State<Dashboard> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Obx(() => Stack(children: [
+      body: Obx(
+        () => Stack(
+          children: [
             Column(
               children: [
                 Expanded(
@@ -104,7 +112,9 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
             Align(alignment: Alignment.bottomCenter, child: bottomNavBar())
-          ])),
+          ],
+        ),
+      ),
     );
   }
 
@@ -145,7 +155,7 @@ class _DashboardState extends State<Dashboard> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Subscriptions()),
+                                builder: (context) => const PlansScreen()),
                           );
                         },
                         shape: RoundedRectangleBorder(

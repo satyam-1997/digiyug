@@ -1,278 +1,499 @@
-import 'package:digiyug/screens/home_screen_ui/navigationbarItems/Profile/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../Common/constants.dart';
+import 'faq.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
+// ignore_for_file: prefer_const_constructors
+class DigiyugProfile extends StatefulWidget {
+  const DigiyugProfile({super.key});
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<DigiyugProfile> createState() => _DigiyugProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _DigiyugProfileState extends State<DigiyugProfile> {
+  late final Color? backgroundColor;
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        margin: EdgeInsets.only(left: 10, right: 10),
+    return Scaffold(
+      //backgroundColor: Color(0xffC9C4C4),
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Card(
-              // color: Colors.redAccent,
-              child: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                  colors: [Color(0xffED213A), Color(0xff93291E)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                )),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // crossAxisAlignment: CrossAxisAlignment.s,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                            margin: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(50)),
-                            height: 70,
-                            width: 70,
-                            // color: Colors.black,
-                            child: Icon(Icons.person)),
-                        Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Kundan Singh Panwar",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w900,
-                                    letterSpacing: 0.3),
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                "+91 9009611093",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w900,
-                                    letterSpacing: 0.3),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => EditProfile(),
-                          ),
-                        );
-                        // Navigator.pushNamed(context,MRouter.sellAndEarnDetails);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 18,
-                          color: Colors.white,
-                        )),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
             Container(
-              margin: EdgeInsets.only(left: 10),
-              child: Text(
-                'Subscription',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            Container(
-                child: Card(
-              // color: Colors.redAccent,
+              height: Get.height * 0.14,
               child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 7.0, top: 15, bottom: 15, right: 7),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // crossAxisAlignment: CrossAxisAlignment.s,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        child: Center(
-                          child: Text(
-                            "Free Plan",
-                            style: TextStyle(
-                                fontSize: 22,
-                                color: primaryColor,
-                                fontWeight: FontWeight.w900,
-                                letterSpacing: 0.3),
-                          ),
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        // Navigator.pushNamed(context,MRouter.sellAndEarnDetails);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 18,
-                          color: primaryColor,
-                        )),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )),
-            Container(
-              margin: EdgeInsets.only(left: 10),
-              child: Text(
-                'Service',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            ListView.builder(
-                itemCount: 6,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    // color: Colors.redAccent,
+                padding: const EdgeInsets.only(top: 5, left: 16, right: 14),
+                child: Card(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        gradient: LinearGradient(
+                            colors: [Color(0xffED213A), Color(0xff93291E)])),
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 7.0, top: 10, bottom: 10, right: 7),
+                      padding: const EdgeInsets.only(left: 16),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // crossAxisAlignment: CrossAxisAlignment.s,
                         children: [
-                          Expanded(
+                          Image(
+                            image: AssetImage("asset/new_images/logo.png"),
+                            width: 60,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 6, left: 17),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Container(
-                                    decoration: BoxDecoration(
-                                        color: primaryColor,
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    height: 50,
-                                    width: 50,
-                                    // color: Colors.black,
-                                    child: Icon(
-                                      index == 0
-                                          ? Icons.support_agent_outlined
-                                          : index == 1
-                                              ? Icons.translate_outlined
-                                              : Icons.room_preferences_rounded,
-                                      color: Colors.white,
-                                    )),
+                                Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Kundan Singh Panwar",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white),
+                                      ),
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                      Text("8997879870",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.white)),
+                                    ]),
                                 SizedBox(
-                                  width: 8,
+                                  width: Get.width * 0.2,
                                 ),
-                                Container(
-                                  child: Text(
-                                    index == 0
-                                        ? 'On spot post'
-                                        : index == 1
-                                            ? 'Change language of post'
-                                            : index == 2
-                                                ? 'Refer a friend'
-                                                : index == 3
-                                                    ? 'Change category type'
-                                                    : index == 4
-                                                        ? "Faq's"
-                                                        : index == 5
-                                                            ? 'Feedback'
-                                                            : "Privacy policy",
-                                    style: TextStyle(
-                                        color: primaryColor,
-                                        fontWeight: FontWeight.w900,
-                                        letterSpacing: 0.3),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8.0, top: 30),
+                                    child: Icon(
+                                      Icons.keyboard_arrow_right,
+                                      color: Colors.white,
+                                      size: 30,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          InkWell(
-                            onTap: () {
-                              // Navigator.pushNamed(context,MRouter.sellAndEarnDetails);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Center(
-                                  child: Icon(
-                                Icons.arrow_forward_ios,
-                                size: 18,
-                                color: primaryColor,
-                              )),
-                            ),
-                          ),
                         ],
                       ),
                     ),
-                  );
-                }),
-            SizedBox(
-              width: double.infinity,
-              height: 50.0,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                          side: BorderSide(color: primaryColor))),
-                  elevation: MaterialStateProperty.all(3.0),
-                  backgroundColor: MaterialStateProperty.all(primaryColor),
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
+                  ),
                 ),
-                child: Text(
-                  'Log out',
-                  style: TextStyle(
-                      color: Colors.white, fontSize: 18, letterSpacing: 0.6),
-                ),
-                onPressed: () {
-                  // if (!_formKeyUsername.currentState!.validate() || !_formKeyMobileNumber.currentState!.validate() ||!_formKeyEmail.currentState!.validate() || !_formKeyPassword.currentState!.validate() ) {
-                  //   return;
-                  // } else if(_signUpController.passwordTextEditingController.text.length < 6 ) {
-                  //   Fluttertoast.showToast(msg: "Sorry!! You can't enter less than 6 character of password!!");
-                  // }else{
-                  //   setState(() {
-                  //     _signUpController.isLoading.value = true;
-                  //   });
-                  //   _signUpController.signUpClick();
-                  // }
-                },
               ),
             ),
-            SizedBox(
-              height: 20,
+
+            //Free Plan---------------------------------------------------------------------------
+            Container(
+              child: Column(
+                children: [
+                  Container(
+                      child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 13, right: 300, bottom: 3, left: 5),
+                    child: Text(
+                      "Subscription",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  )),
+
+                  Container(
+                    width: 384,
+                    height: 67,
+                    child: Card(
+                      color: Color(0xffFFF0F0),
+                      shadowColor: Color(0xffFFF0F0),
+                      child: Container(
+                        child: ListTile(
+                          title: Padding(
+                            padding: const EdgeInsets.only(left: 40),
+                            child: GradientText(
+                              'Free Plan',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              gradient: LinearGradient(colors: [
+                                Color(0xffED213A),
+                                Color(0xff93291E)
+                              ]),
+                            ),
+                          ),
+                          trailing: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: Color(0xffA21B31),
+                            size: 30,
+                          ),
+                          onTap: () {},
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  //Services-------------------------------------------------------------------------
+                  Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                            child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 9, right: 325, bottom: 3, left: 5),
+                          child: Text(
+                            "Services",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        )),
+                        Container(
+                          width: 384,
+                          height: 66,
+                          child: Card(
+                            color: Color(0xffFFF0F0),
+                            shadowColor: Color(0xffFFF0F0),
+                            child: Container(
+                              child: ListTile(
+                                leading: Container(
+                                  height: 45,
+                                  width: 45,
+                                  child: CircleAvatar(
+                                      radius: 56,
+                                      backgroundColor: Color(0xffA21B31),
+                                      child: SvgPicture.asset(
+                                        "asset/new_images/live-support.svg",
+                                        width: 25,
+                                        height: 25,
+                                        color: Colors.white,
+                                      )),
+                                ),
+                                title: Text(
+                                  'On Spot Post',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xffA21B31)),
+                                ),
+                                trailing: Icon(
+                                  Icons.keyboard_arrow_right,
+                                  color: Color(0xffA21B31),
+                                  size: 30,
+                                ),
+                                onTap: () {},
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  //2 nd service-------------------------------------------------------------------------------
+                  Container(
+                      width: 384,
+                      height: 66,
+                      child: Card(
+                        color: Color(0xffFFF0F0),
+                        shadowColor: Color(0xffFFF0F0),
+                        child: Container(
+                          //padding: EdgeInsets.only(left: 1),
+                          child: ListTile(
+                            leading: Container(
+                              height: 45,
+                              width: 45,
+                              child: CircleAvatar(
+                                  radius: 56,
+                                  backgroundColor: Color(0xffA21B31),
+                                  child: SvgPicture.asset(
+                                    "asset/new_images/language-translation.svg",
+                                    width: 25,
+                                    height: 25,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            title: Text(
+                              'Change language of post',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffA21B31)),
+                            ),
+                            trailing: Icon(
+                              Icons.keyboard_arrow_right,
+                              color: Color(0xffA21B31),
+                              size: 30,
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  //3 nd service-------------------------------------------------------------------------------
+                  Container(
+                      width: 384,
+                      height: 66,
+                      child: Card(
+                        color: Color(0xffFFF0F0),
+                        shadowColor: Color(0xffFFF0F0),
+                        child: Container(
+                          //padding: EdgeInsets.only(left: 1),
+                          child: ListTile(
+                            leading: Container(
+                              height: 45,
+                              width: 45,
+                              child: CircleAvatar(
+                                  radius: 56,
+                                  backgroundColor: Color(0xffA21B31),
+                                  child: SvgPicture.asset(
+                                    "asset/new_images/share.svg",
+                                    width: 25,
+                                    height: 25,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            title: Text(
+                              'Refer a friend',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffA21B31)),
+                            ),
+                            trailing: Icon(
+                              Icons.keyboard_arrow_right,
+                              color: Color(0xffA21B31),
+                              size: 30,
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  //4 nd service-------------------------------------------------------------------------------
+                  Container(
+                      width: 384,
+                      height: 66,
+                      child: Card(
+                        color: Color(0xffFFF0F0),
+                        shadowColor: Color(0xffFFF0F0),
+                        child: Container(
+                          //padding: EdgeInsets.only(left: 1),
+                          child: ListTile(
+                            leading: Container(
+                              height: 45,
+                              width: 45,
+                              child: CircleAvatar(
+                                  radius: 56,
+                                  backgroundColor: Color(0xffA21B31),
+                                  child: SvgPicture.asset(
+                                    "asset/new_images/category.svg",
+                                    width: 25,
+                                    height: 25,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            title: Text(
+                              'Change category type',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffA21B31)),
+                            ),
+                            trailing: Icon(
+                              Icons.keyboard_arrow_right,
+                              color: Color(0xffA21B31),
+                              size: 30,
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  //5 nd service-------------------------------------------------------------------------------
+                  Container(
+                      width: 384,
+                      height: 66,
+                      child: Card(
+                        color: Color(0xffFFF0F0),
+                        shadowColor: Color(0xffFFF0F0),
+                        child: Container(
+                          //padding: EdgeInsets.only(left: 1),
+                          child: ListTile(
+                            leading: Container(
+                              height: 45,
+                              width: 45,
+                              child: CircleAvatar(
+                                  radius: 56,
+                                  backgroundColor: Color(0xffA21B31),
+                                  child: SvgPicture.asset(
+                                    "asset/new_images/chat-bubbles.svg",
+                                    width: 25,
+                                    height: 25,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            title: Text(
+                              'Faqs',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffA21B31)),
+                            ),
+                            trailing: Icon(
+                              Icons.keyboard_arrow_right,
+                              color: Color(0xffA21B31),
+                              size: 30,
+                            ),
+                            onTap: () {
+                              Get.to(() => DigiyugFaq());
+                            },
+                          ),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  //6 nd service-------------------------------------------------------------------------------
+                  Container(
+                      width: 384,
+                      height: 66,
+                      child: Card(
+                        color: Color(0xffFFF0F0),
+                        shadowColor: Color(0xffFFF0F0),
+                        child: Container(
+                          //padding: EdgeInsets.only(left: 1),
+                          child: ListTile(
+                            leading: Container(
+                              height: 45,
+                              width: 45,
+                              child: CircleAvatar(
+                                  radius: 56,
+                                  backgroundColor: Color(0xffA21B31),
+                                  child: SvgPicture.asset(
+                                    "asset/new_images/feedback.svg",
+                                    width: 25,
+                                    height: 25,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            title: Text(
+                              'Feedback',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffA21B31)),
+                            ),
+                            trailing: Icon(
+                              Icons.keyboard_arrow_right,
+                              color: Color(0xffA21B31),
+                              size: 30,
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  //7 nd service-------------------------------------------------------------------------------
+                  Container(
+                      width: 384,
+                      height: 66,
+                      child: Card(
+                        color: Color(0xffFFF0F0),
+                        shadowColor: Color(0xffFFF0F0),
+                        child: Container(
+                          //padding: EdgeInsets.only(left: 1),
+                          child: ListTile(
+                            leading: Container(
+                              height: 45,
+                              width: 45,
+                              child: CircleAvatar(
+                                  radius: 56,
+                                  backgroundColor: Color(0xffA21B31),
+                                  child: SvgPicture.asset(
+                                    "asset/new_images/file.svg",
+                                    width: 25,
+                                    height: 25,
+                                  )),
+                            ),
+                            title: Text(
+                              'Privacy Policy',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffA21B31)),
+                            ),
+                            trailing: Icon(
+                              Icons.keyboard_arrow_right,
+                              color: Color(0xffA21B31),
+                              size: 30,
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: 375,
+                          height: 57,
+                          child: ElevatedButton(
+                            child: Text(
+                              'Log out',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xffA21B31),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "Version 1.0.1",
+                          style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff858585)),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             )
           ],
         ),

@@ -59,6 +59,8 @@ dependencies:
   gradient_widgets: ^0.6.0
   expansion_tile_card: ^2.0.0
   gradient_borders:
+  url_launcher: ^6.1.10
+
 
 dev_dependencies:
   flutter_test:

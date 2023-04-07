@@ -1,9 +1,8 @@
+import 'package:digiyug/screens/home_screen_ui/navigationbarItems/Profile/faq/feedback.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import 'faq.dart';
 
 // ignore_for_file: prefer_const_constructors
 class DigiyugProfile extends StatefulWidget {
@@ -368,7 +367,7 @@ class _DigiyugProfileState extends State<DigiyugProfile> {
                               size: 30,
                             ),
                             onTap: () {
-                              Get.to(() => DigiyugFaq());
+                              Get.to(() => FeedBackForm());
                             },
                           ),
                         ),

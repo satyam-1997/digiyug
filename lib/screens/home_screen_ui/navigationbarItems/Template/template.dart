@@ -5,8 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -320,6 +318,7 @@ class _TemplateState extends State<Template> {
   final ImagePicker _picker = ImagePicker();
   XFile? image;
   File? selectedImage;
+
   _handleMediaPermissions() async {
     var status = Permission.storage.request();
     if (await status.isGranted || await status.isLimited) {
@@ -434,84 +433,89 @@ class _TemplateState extends State<Template> {
       key: globalKey,
       child: Stack(
         children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.45,
-            width: MediaQuery.of(context).size.width * 0.95,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(bgImage),
-                fit: BoxFit.fill,
+          Card(
+            elevation: 2,
+            child: Container(
+              // height: MediaQuery.of(context).size.height * 0.45,
+              // width: MediaQuery.of(context).size.width * 0.95,
+              decoration: BoxDecoration(
+                color: Colors.amberAccent,
+                // image: DecorationImage(
+                //   image: AssetImage("asset/images/template_01.png"),
+                //   fit: BoxFit.fitWidth,
+                // ),
               ),
+              child: Image.asset("asset/images/template_01.png"),
             ),
           ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 4, right: 8.0, bottom: 4),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.06,
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          color: nameColor,
-                          child: const Center(
-                            child: Text(
-                              "Johnathan Doe",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            _handleMediaPermissions();
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            width: MediaQuery.of(context).size.width * 0.32,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              border: Border.all(
-                                color: profileImageBorderColor,
-                                width: 4.0,
-                              ),
-                            ),
-                            child: selectedImage != null
-                                ? Image.file(
-                                    selectedImage!,
-                                    fit: BoxFit.fill,
-                                  )
-                                : const Icon(
-                                    Icons.image,
-                                    size: 50,
-                                  ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.08,
-                    width: MediaQuery.of(context).size.width,
-                    color: userDetailsColor,
-                    child: _userDetails(),
-                  ),
-                ],
-              ),
-            ),
-          )
+          //   Positioned(
+          //     bottom: 0,
+          //     right: 0,
+          //     left: 0,
+          //     child: Align(
+          //       alignment: Alignment.bottomCenter,
+          //       child: Column(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: [
+          //           Padding(
+          //             padding:
+          //                 const EdgeInsets.only(left: 4, right: 8.0, bottom: 4),
+          //             child: Row(
+          //               crossAxisAlignment: CrossAxisAlignment.end,
+          //               mainAxisAlignment: MainAxisAlignment.start,
+          //               children: [
+          //                 Container(
+          //                   height: MediaQuery.of(context).size.height * 0.06,
+          //                   width: MediaQuery.of(context).size.width * 0.4,
+          //                   color: nameColor,
+          //                   child: const Center(
+          //                     child: Text(
+          //                       "Johnathan Doe",
+          //                       style: TextStyle(
+          //                         color: Colors.white,
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ),
+          //                 const Spacer(),
+          //                 GestureDetector(
+          //                   onTap: () {
+          //                     _handleMediaPermissions();
+          //                   },
+          //                   child: Container(
+          //                     height: MediaQuery.of(context).size.height * 0.15,
+          //                     width: MediaQuery.of(context).size.width * 0.32,
+          //                     decoration: BoxDecoration(
+          //                       color: Colors.grey,
+          //                       border: Border.all(
+          //                         color: profileImageBorderColor,
+          //                         width: 4.0,
+          //                       ),
+          //                     ),
+          //                     child: selectedImage != null
+          //                         ? Image.file(
+          //                             selectedImage!,
+          //                             fit: BoxFit.fill,
+          //                           )
+          //                         : const Icon(
+          //                             Icons.image,
+          //                             size: 50,
+          //                           ),
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           ),
+          //           // Container(
+          //           //   height: MediaQuery.of(context).size.height * 0.08,
+          //           //   width: MediaQuery.of(context).size.width,
+          //           //   color: userDetailsColor,
+          //           //   child: _userDetails(),
+          //           // ),
+          //         ],
+          //       ),
+          //     ),
+          //   )
         ],
       ),
     );

@@ -1,10 +1,7 @@
-import 'dart:io';
-
 import 'package:digiyug/routes/router.dart';
 import 'package:digiyug/util/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +22,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeManager.appTheme,
       locale: const Locale('en', 'US'),
       onGenerateRoute: MRouter.generateRoute,
-    
       initialRoute: MRouter.splashRoute,
       debugShowCheckedModeBanner: false,
     );
